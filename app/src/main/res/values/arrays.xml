@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="tipos_pelis_array">
+        <item>Sin categoría</item>
+        <item>Terror</item>
+        <item>Comedia</item>
+        <item>Romantica</item>
+    </string-array>
+
+</resources>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutPrincipal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/TituloPagina"
+        android:layout_width="410dp"
+        android:layout_height="54dp"
+        android:text="@string/Titulo"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
+
+    <TextView
+        android:id="@+id/TituloPelicula"
+        android:layout_width="68dp"
+        android:layout_height="25dp"
+        android:text="@string/TituloPelicula"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.078"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.121" />
+
+    <TextView
+        android:id="@+id/ArgumentoPelicula"
+        android:layout_width="80dp"
+        android:layout_height="31dp"
+        android:text="@string/ArgumentoPelicula"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.078"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/InputTitulo"
+        app:layout_constraintVertical_bias="0.015" />
+
+    <TextView
+        android:id="@+id/CategoriaPelicula"
+        android:layout_width="80dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="25dp"
+        android:text="@string/CategoriaPelicula"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.078"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/InputArgumento"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/InputTitulo"
+        android:layout_width="344dp"
+        android:layout_height="63dp"
+        android:ems="10"
+        android:hint="@string/TootipTituloPelicula"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.402"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TituloPelicula"
+        app:layout_constraintVertical_bias="0.017" />
+
+    <EditText
+        android:id="@+id/InputArgumento"
+        android:layout_width="345dp"
+        android:layout_height="145dp"
+        android:ems="10"
+        android:hint="@string/TootipDescripcionPelicula"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.397"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ArgumentoPelicula"
+        app:layout_constraintVertical_bias="0.024" />
+
+    <Button
+        android:id="@+id/BtnGuardar"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="@string/BotonGuardar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.948"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.864" />
+
+    <EditText
+        android:id="@+id/FechaPelicula"
+        android:layout_width="264dp"
+        android:layout_height="55dp"
+        android:ems="10"
+        android:hint="@string/FechaPelicula"
+        android:inputType="date"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.176"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/DuracionPelicula"
+        app:layout_constraintVertical_bias="0.13" />
+
+    <EditText
+        android:id="@+id/DuracionPelicula"
+        android:layout_width="240dp"
+        android:layout_height="61dp"
+        android:ems="10"
+        android:hint="@string/DuracionPelicula"
+        android:inputType="time"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.157"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/SpinnerCategoría"
+        app:layout_constraintVertical_bias="0.124" />
+
+    <ImageButton
+        android:id="@+id/EditarBoton"
+        android:layout_width="67dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="22dp"
+        android:contentDescription="@string/EditarTooltip"
+        app:layout_constraintBottom_toBottomOf="@+id/SpinnerCategoría"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/SpinnerCategoría"
+        app:layout_constraintTop_toTopOf="@+id/SpinnerCategoría"
+        app:layout_constraintVertical_bias="0.6"
+        app:srcCompat="@android:drawable/ic_menu_edit" />
+
+    <Spinner
+        android:id="@+id/SpinnerCategoría"
+        android:layout_width="254dp"
+        android:layout_height="51dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.171"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/CategoriaPelicula"
+        app:layout_constraintVertical_bias="0.043"
+        android:entries="@array/tipos_pelis_array"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

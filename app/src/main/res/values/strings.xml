@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">FavMovies</string>
+    <string name="Titulo">Mis pelis favoritas</string>
+    <string name="TituloPelicula">Titulo</string>
+    <string name="TootipTituloPelicula">Título de la película</string>
+    <string name="ArgumentoPelicula">Argumento</string>
+    <string name="TootipDescripcionPelicula">Sinapsis de la película</string>
+    <string name="CategoriaPelicula">Categoría</string>
+    <string name="BotonGuardar">Guardar</string>
+    <string name="FechaPelicula">Fecha de la película</string>
+    <string name="DuracionPelicula">Duración</string>
+    <string name="EditarTooltip">Editar</string>
+    <string name="e_tituloInvalido">El titulo no puede estar vacio</string>
+    <string name="e_descripcionInvalida">La descripción no puede estar vacía</string>
+    <string name="e_duracionInvalida_vacia">La duracion de la pelicula no puede estar vacía</string>
+    <string name="e_duracionInvalida_formato">La duración ha de seguir el formato hh:mm (ej. 01:33)</string>
+    <string name="e_fechaInvalida_vacia">La fecha de salida de la película no puede estar vacía</string>
+    <string name="e_fechaInvalida_formato">El formato para la fecha ha de ser dd/MM/yyyy (ej. 21/05/2000)</string>
+
+</resources>

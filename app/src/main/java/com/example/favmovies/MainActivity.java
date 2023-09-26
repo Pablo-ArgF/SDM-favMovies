@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -11,16 +12,20 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.favmovies.modelo.Categoria;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
     private Snackbar msgCreaCategoria;
+    private Spinner spinner;
+    private ArrayList<Categoria> listaCategorias;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
         //de que el componente está en memoria
         Button btnGuardar = findViewById(R.id.BtnGuardar);
         btnGuardar.setOnClickListener(new View.OnClickListener(){
-
             @Override
             public void onClick(View view) {
                 //validacion de campos
@@ -62,6 +66,32 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        listaCategorias = new ArrayList<>();
+        listaCategorias.add(new Categoria("Accion","Pelicula de accion"));
+        listaCategorias.add(new Categoria("Comedia","Pelicula de comedia"));
+
+        spinner = (Spinner) findViewById(R.id.SpinnerCategoría);
+        introListaSpinner(spinner,listaCategorias);
+
+
+    }
+
+    private void introListaSpinner(Spinner spinner, ArrayList<Categoria> listaCategorias){
+        //creamos un array con nombres de categorias
+        ArrayList<String> nombres = new ArrayList<>();
+        nombres.add("Sin definir");
+        for(Categoria cat : listaCategorias){
+            nombres.add(cat.getNombre());
+        }
+
+        //crea un ArrayAdapter usando un array de strings y el layout por defecto del spinner
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item,nombres);
+        //especifica el layout para usar cuando aparece la lista de elecciones
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //aplicar el adaptador al spinner
+        spinner.setAdapter(adapter);
 
     }
 

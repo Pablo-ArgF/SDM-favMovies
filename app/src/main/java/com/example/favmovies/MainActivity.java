@@ -1,8 +1,13 @@
 package com.example.favmovies;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -23,9 +28,15 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String POS_CATEGORIA_SELECCIONADA = " ";
+    public static final int GESTION_CATEOGIRA = 1;
+    public static final String CATEGORIA_SELECCIONADA = "categoria_seleccionada";
+    public static final String CATEGORIA_MODIFICADA = "categoría_modificada";
+
     private Snackbar msgCreaCategoria;
     private Spinner spinner;
     private ArrayList<Categoria> listaCategorias;
+    private boolean creandoCategoria = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,20 +61,40 @@ public class MainActivity extends AppCompatActivity {
         //boton de edicion
         ImageButton btnEdit = findViewById(R.id.EditarBoton);
         btnEdit.setOnClickListener(new View.OnClickListener(){
-
             @Override
             public void onClick(View view) {
                 Spinner spinner = findViewById(R.id.SpinnerCategoría);
                 if(spinner.getSelectedItemPosition() == 0){ //si esta sin categoria
-                    //TODO acabar esto en la clase
-                    /*msgCreaCategoria = Snackbar.make(findViewById(R.id.layoutPrincipal),
-                            R.string.msg_crearcategoria,Snackbar.LENGTH_LONG);*/
+                    msgCreaCategoria = Snackbar.make(findViewById(R.id.layoutPrincipal),
+                            R.string.msg_crearcategoria,Snackbar.LENGTH_LONG);
                 }
                 else {
                     //TODO acabar esto en la clase
                     /*msgCreaCategoria = Snackbar.make(findViewById(R.id.layoutPrincipal),
                             R.string.msg_crear,Snackbar.LENGTH_LONG);*/
                 }
+
+
+                msgCreaCategoria.setAction(android.R.string.cancel, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Snackbar.make(findViewById(R.id.layoutPrincipal),"Accion cancelada",
+                                Snackbar.LENGTH_LONG).show();
+                    }
+                });
+
+                //accion de crear una categoria
+                msgCreaCategoria.setAction(android.R.string.ok, new View.OnClickListener(){
+                    @Override
+                    public void onClick(View view) {
+                        Snackbar.make(findViewById(R.id.layoutPrincipal),"Accion realizada",
+                                Snackbar.LENGTH_LONG).show();
+                        modificarCategoria();
+                    }
+
+                });
+                //IMPORTANTE para ver el snackbar
+                msgCreaCategoria.show();
             }
         });
 
@@ -75,6 +106,45 @@ public class MainActivity extends AppCompatActivity {
         introListaSpinner(spinner,listaCategorias);
 
 
+    }
+
+    private void modificarCategoria(){
+        // En el intent pasamos datos de una categoria a otra
+        Intent categoriaIntent = new Intent(MainActivity.this, CategoriasActivity.class);
+        // Lanza activity categoria sin pasarle niguna categoria primero
+        // startActivity(categoriaIntent);
+
+        Log.i("Posicion Categoría Seleccionada Spinner", spinner.getSelectedItemPosition() + " ");
+        categoriaIntent.putExtra(POS_CATEGORIA_SELECCIONADA, spinner.getSelectedItemPosition());
+
+        creandoCategoria = true;
+        if (spinner.getSelectedItemPosition() > 0) {
+            creandoCategoria = false;
+            categoriaIntent.putExtra(CATEGORIA_SELECCIONADA, listaCategorias.get(spinner.getSelectedItemPosition() - 1));
+        }
+
+        // lanzamos activity para gestion cateogria esperando por un resultado
+        startActivityForResult(categoriaIntent, GESTION_CATEOGIRA);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        return false; //TODO acabar esto en clase
+        /*if(item.getItemId() == R.id.Compartir){
+            Conexion conexion = new Conexion(getApplicationContext());
+            if(conexion.compruebaConexion()){
+                compartirPeli();
+            }
+            else Toast.makeText(getApplicationContext(),
+                    "No se ha establecido la la conexino. Comprueba tu conexion",Toast.LENGTH_LONG).show();
+        }
+        return super.onOptionsItemSelected(item);*/
     }
 
     private void introListaSpinner(Spinner spinner, ArrayList<Categoria> listaCategorias){

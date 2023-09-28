@@ -16,5 +16,15 @@
     <string name="e_duracionInvalida_formato">La duración ha de seguir el formato hh:mm (ej. 01:33)</string>
     <string name="e_fechaInvalida_vacia">La fecha de salida de la película no puede estar vacía</string>
     <string name="e_fechaInvalida_formato">El formato para la fecha ha de ser dd/MM/yyyy (ej. 21/05/2000)</string>
+    <string name="TituloCreacionCategoria">Creación de una categoría</string>
+    <string name="NombreCategoria">Nombre de la categoria</string>
+    <string name="TooltipInputTituloCategoria">Titulo categoria</string>
+    <string name="TituloDescripcionCategoria">Descripcion de la categoria</string>
+    <string name="TooltipInputArgumento">Argumento de la categoria</string>
+    <string name="CancelButton">Cancel</string>
+    <string name="OkButton">Ok</string>
+    <string name="msg_crearcategoria">Se va a crear una nueva categoria</string>
+    <string name="NuevaCategoria">Nueva categoria</string>
+    <string name="modifica_categoria">Modifica la categoria</string>
 
 </resources>

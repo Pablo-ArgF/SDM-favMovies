@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/Compartir"
+        android:icon="@android:drawable/ic_menu_share"
+        android:title="Compartir"
+        app:showAsAction="ifRoom"/>
+    <!-- ifRoom muestra el icono si hay espacio, si no, muestra el titulo -->
+</menu>

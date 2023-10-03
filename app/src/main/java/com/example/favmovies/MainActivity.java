@@ -18,6 +18,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.favmovies.modelo.Categoria;
+import com.example.favmovies.modelo.Pelicula;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.text.DateFormat;
@@ -32,21 +33,27 @@ public class MainActivity extends AppCompatActivity {
     public static final int GESTION_CATEOGIRA = 1;
     public static final String CATEGORIA_SELECCIONADA = "categoria_seleccionada";
     public static final String CATEGORIA_MODIFICADA = "categoría_modificada";
+    public static final int IDENTIFICADOR_MAIN_ACTIVITY = 777;
+
+    public static final int RESULT_OK = 2;
 
     private Snackbar msgCreaCategoria;
     private Spinner spinner;
     private ArrayList<Categoria> listaCategorias;
-    private boolean creandoCategoria = false;
+    private boolean creandoCategoria = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Log.i("Hola","Hola");
 
         //metemos los listeners despues de que se haga el setcontetview para asegurar
         //de que el componente está en memoria
         Button btnGuardar = findViewById(R.id.BtnGuardar);
         btnGuardar.setOnClickListener(new View.OnClickListener(){
+
+
             @Override
             public void onClick(View view) {
                 //validacion de campos
@@ -54,6 +61,18 @@ public class MainActivity extends AppCompatActivity {
                     Snackbar.make(findViewById(R.id.layoutPrincipal),"Elemento guardado",
                             Snackbar.LENGTH_LONG)
                             .show();
+                    Intent intentResultado = new Intent();
+                    EditText inputTitulo = findViewById(R.id.InputTitulo);
+                    EditText inputArgumento = findViewById(R.id.InputArgumento);
+                    EditText inputFecha = findViewById(R.id.FechaPelicula);
+                    EditText inputDuracion = findViewById(R.id.DuracionPelicula);
+                    Pelicula peli = new Pelicula(inputTitulo.getText().toString(),inputArgumento.getText().toString(),
+                            listaCategorias.get(spinner.getSelectedItemPosition() - 1),
+                            inputFecha.getText().toString(),inputDuracion.getText().toString());
+
+                    intentResultado.putExtra(MainRecyclerActivity.PELICULA_CREADA,peli);
+                    setResult(MainActivity.RESULT_OK,intentResultado);
+                    finish();
                 }
             }
         });
@@ -104,6 +123,38 @@ public class MainActivity extends AppCompatActivity {
 
         spinner = (Spinner) findViewById(R.id.SpinnerCategoría);
         introListaSpinner(spinner,listaCategorias);
+
+
+        //comprobarmos los valores del bundle en caso que este consultando la pelicula
+        Intent intentPeli = getIntent();
+        Pelicula peli = intentPeli.getParcelableExtra(MainRecyclerActivity.PELICULA_SELECCIONADA);
+        if(peli != null){ //Estamos en modo enseñar una peli
+            //desactivamos todos los fields para que no pueda tocarlos junto con el boton de guardar
+            btnGuardar.setEnabled(false);
+            EditText inputTitulo = findViewById(R.id.InputTitulo);
+            EditText inputArgumento = findViewById(R.id.InputArgumento);
+            EditText inputFecha = findViewById(R.id.FechaPelicula);
+            EditText inputDuracion = findViewById(R.id.DuracionPelicula);
+            inputTitulo.setEnabled(false);
+            inputArgumento.setEnabled(false);
+            inputFecha.setEnabled(false);
+            inputDuracion.setEnabled(false);
+
+            inputTitulo.setText(peli.getTitulo());
+            inputArgumento.setText(peli.getArgumento());
+            inputFecha.setText(peli.getFecha());
+            inputDuracion.setText(peli.getDuracion());
+            //TODO falta la categoria
+            int posicion = -1;
+            for (int i = 0; i<listaCategorias.size() ; i++) {
+                if (listaCategorias.get(i).getNombre().equals(peli.getCategoria().getNombre()))
+                    posicion = i;
+                i++;
+            }
+            spinner.setSelection(posicion);
+            spinner.setEnabled(false);
+        }
+
 
 
     }

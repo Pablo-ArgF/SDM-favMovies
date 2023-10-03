@@ -28,12 +28,12 @@ public class CategoriasActivity extends AppCompatActivity {
         if(postCategoria>0){
             catEntrada = intent.getParcelableExtra(MainActivity.CATEGORIA_SELECCIONADA);
 
-            TextView textViewCre = (TextView) findViewById(R.id.tituloCrearCategoria); //TODO posible fallo
+            TextView textViewCre = (TextView) findViewById(R.id.tituloCrearCategoria);
             EditText editNameCategoria = (EditText) findViewById(R.id.editCategoryName);
             EditText editDescripcion = (EditText) findViewById(R.id.editCateogryDescription);
             // Recuperamos referencia al botón
-            Button btnOK = (Button)findViewById(R.id.btnOkCategoria);
-            Button btnCancel = (Button)findViewById(R.id.btnCancel);
+            Button btnOK = (Button)findViewById(R.id.btnOkCrearCategoria);
+            Button btnCancel = (Button)findViewById(R.id.btnCancelCategoria);
 
 
             if(postCategoria==0)
@@ -48,7 +48,6 @@ public class CategoriasActivity extends AppCompatActivity {
             // Definir el observber para el evento click del botón guardar
             // Definimos listener
             btnOK.setOnClickListener(new View.OnClickListener(){
-            // TODO comrpobar botones13:1
                 @Override
                 public void onClick(View view) {
                     Categoria categSalida = new Categoria(editNameCategoria.toString(), editDescripcion.toString());

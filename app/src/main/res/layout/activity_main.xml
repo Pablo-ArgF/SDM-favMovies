@@ -134,6 +134,7 @@
         android:layout_height="66dp"
         android:layout_marginStart="22dp"
         android:contentDescription="@string/EditarTooltip"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/SpinnerCategoría"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

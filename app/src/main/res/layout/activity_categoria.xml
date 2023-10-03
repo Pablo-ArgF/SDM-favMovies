@@ -20,7 +20,7 @@
         app:layout_constraintVertical_bias="0.458" />
 
     <Button
-        android:id="@+id/btnCancel"
+        android:id="@+id/btnCancelCategoria"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/CancelButton"
@@ -32,7 +32,7 @@
         app:layout_constraintVertical_bias="0.926" />
 
     <Button
-        android:id="@+id/btnOkCategoria"
+        android:id="@+id/btnOkCrearCategoria"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -40,7 +40,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.317"
-        app:layout_constraintStart_toEndOf="@+id/btnCancel"
+        app:layout_constraintStart_toEndOf="@+id/btnCancelCategoria"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.926" />
 
@@ -59,14 +59,14 @@
 
     <EditText
         android:id="@+id/editCategoryName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="277dp"
+        android:layout_height="50dp"
         android:ems="10"
+        android:hint="@string/TooltipInputTituloCategoria"
         android:inputType="text"
-        android:text="@string/TooltipInputTituloCategoria"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.139"
+        app:layout_constraintHorizontal_bias="0.231"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/labelNombreCategoria"
         app:layout_constraintVertical_bias="0.026" />
@@ -76,8 +76,8 @@
         android:layout_width="328dp"
         android:layout_height="63dp"
         android:ems="10"
+        android:hint="@string/TooltipInputArgumento"
         android:inputType="text"
-        android:text="@string/TooltipInputArgumento"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.373"
@@ -87,8 +87,8 @@
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="176dp"
-        android:layout_height="15dp"
+        android:layout_width="173dp"
+        android:layout_height="24dp"
         android:text="@string/TituloDescripcionCategoria"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

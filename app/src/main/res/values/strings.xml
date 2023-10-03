@@ -26,5 +26,7 @@
     <string name="msg_crearcategoria">Se va a crear una nueva categoria</string>
     <string name="NuevaCategoria">Nueva categoria</string>
     <string name="modifica_categoria">Modifica la categoria</string>
+    <string name="titulopeli">Titulo de la pelicula</string>
+    <string name="fechaestreno">Fecha de estreno</string>
 
 </resources>

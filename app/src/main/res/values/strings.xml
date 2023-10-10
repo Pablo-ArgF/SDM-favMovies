@@ -130,5 +130,7 @@
     <string name="desc_caratula">Descripcion de la caratula</string>
     <string name="contenido">Contenido</string>
     <string name="desc_imagen_fondo">Descripcion imagen de fondo</string>
+    <string name="subject_compartir">"Te comparto la siguiente pelicula: "</string>
+    <string name="titulo">Titulo</string>
 
 </resources>

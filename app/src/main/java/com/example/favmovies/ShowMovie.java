@@ -11,10 +11,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.favmovies.modelo.Pelicula;
+import com.example.favmovies.util.Conexion;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.squareup.picasso.Picasso;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -75,6 +77,27 @@ public class ShowMovie extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.Compartir){
+            Conexion con = new Conexion(getApplicationContext());
+
+            if(con.compruebaConexion()){
+                compartirPeli();
+            }
+            else
+                Toast.makeText(getApplicationContext(), "No se ha establecido la conexion, no se puede compartir.",Toast.LENGTH_LONG);
+
+        }
+        return false;
+    }
+
     // Carga los datos que tenemos en la instancia en los componentes de la activity para mostrarlos
     public void mostrarDatos(Pelicula pelicula){
         if (!pelicula.getTitulo().isEmpty()) { //apertura en modo consulta
@@ -97,7 +120,33 @@ public class ShowMovie extends AppCompatActivity {
     }
 
 
+    /**
+     * Abre el diálogo de compartir para que el usuario elija una app
+     * Luego envia el texto que repreenta la pelicula
+     */
+    public void compartirPeli(){
+        /* es necesario hacer un intent con la constate ACTION_SEND */
+        /*Llama a cualquier app que haga un envío*/
+        Intent itSend = new Intent(Intent.ACTION_SEND);
+        /* vamos a enviar texto plano */
+        itSend.setType("text/plain");
+        // itSend.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{para});
+        itSend.putExtra(Intent.EXTRA_SUBJECT,
+                getString(R.string.subject_compartir) + ": " + pelicula.getTitulo());
+        itSend.putExtra(Intent.EXTRA_TEXT, getString(R.string.titulo)
+                +": "+pelicula.getTitulo()+"\n"+
+                getString(R.string.contenido)
+                +": "+pelicula.getArgumento());
 
+        /* iniciamos la actividad */
+                /* puede haber más de una aplicacion a la que hacer un ACTION_SEND,
+                   nos sale un ventana que nos permite elegir una.
+                   Si no lo pongo y no hay activity disponible, pueda dar un error */
+        Intent shareIntent=Intent.createChooser(itSend, null);
+
+        startActivity(shareIntent);
+
+    }
 
 
     /**

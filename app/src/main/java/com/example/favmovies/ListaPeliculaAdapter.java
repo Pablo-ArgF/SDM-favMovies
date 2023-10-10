@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.favmovies.R;
 import com.example.favmovies.modelo.Pelicula;
+import com.squareup.picasso.Picasso;
 
 
 public class ListaPeliculaAdapter extends RecyclerView.Adapter<ListaPeliculaAdapter.PeliculaViewHolder> {
@@ -82,6 +83,8 @@ public class ListaPeliculaAdapter extends RecyclerView.Adapter<ListaPeliculaAdap
 
             fecha.setText(pelicula.getCategoria().getNombre());
             // cargar imagen
+            Picasso.get().load(pelicula.getUrlCaratula()).into(imagen);
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
                     Log.i("Hola", "Hola");

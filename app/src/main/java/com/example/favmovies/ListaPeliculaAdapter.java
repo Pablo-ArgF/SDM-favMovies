@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -19,7 +20,7 @@ import com.squareup.picasso.Picasso;
 
 public class ListaPeliculaAdapter extends RecyclerView.Adapter<ListaPeliculaAdapter.PeliculaViewHolder> {
 
-    private List<Pelicula> listaPeliculas;
+    private List<Pelicula> listaPeliculas = new LinkedList<>();
     private OnItemClickListener listener;
 
     // Interfaz para manejar el evento click sobre un elemento

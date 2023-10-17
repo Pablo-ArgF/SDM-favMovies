@@ -11,8 +11,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.favmovies.modelo.Pelicula;
+import com.example.favmovies.ui.ActoresFragment;
+import com.example.favmovies.ui.ArgumentoFragment;
+import com.example.favmovies.ui.InfoFragment;
 import com.example.favmovies.util.Conexion;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.squareup.picasso.Picasso;
 
@@ -38,11 +42,60 @@ public class ShowMovie extends AppCompatActivity {
     TextView duracion;
     TextView argumento;
     ImageView caratula;
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        /* Cuando se selecciona uno de los botones / ítems*/
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            if (pelicula == null)
+                return false;
+
+            int itemId = item.getItemId();
+
+            /* Según el caso, crearemos un Fragmento u otro */
+            if (itemId == R.id.navigation_argumento)
+            {
+                /* Haciendo uso del FactoryMethod pasándole todos los parámetros necesarios */
+
+                /* Argumento solamente necesita.... El argumento de la película */
+
+                ArgumentoFragment argumentoFragment=ArgumentoFragment.newInstance
+                        (pelicula.getArgumento());
+
+                /* ¿Qué estaremos haciendo aquí? */
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, argumentoFragment).commit();
+                return true;
+            }
+
+            if (itemId == R.id.navigation_actores)
+            {
+                ActoresFragment actoresFrag =
+                        ActoresFragment.newInstance("Aqui van los actores");
+
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, actoresFrag).commit();
+                return true;
+            }
+
+            if (itemId == R.id.navigation_info)
+            {
+                InfoFragment infoFrag = InfoFragment.newInstance(pelicula.getDuracion(),
+                        pelicula.getFecha(), pelicula.getUrlCaratula());
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, infoFrag).commit();
+                return true;
+            }
+            //Si no es nula y no entra... Algo falla.
+            throw new IllegalStateException("Unexpected value: " + item.getItemId());
+        };
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_movie);
+
+        BottomNavigationView navView = findViewById(R.id.nav_view);
+        navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         //Recepción datos como activity secundaria
         Intent intentPeli= getIntent();
@@ -57,10 +110,10 @@ public class ShowMovie extends AppCompatActivity {
 
         // Gestión de los controles que contienen los datos de la película
         categoria= (TextView)findViewById(R.id.categoria);
-        estreno= (TextView)findViewById(R.id.estreno);
-        duracion= (TextView)findViewById(R.id.duracion);
-        argumento= (TextView)findViewById(R.id.argumento);
-        caratula= (ImageView)findViewById(R.id.caratula);
+        estreno= (TextView)findViewById(R.id.text_fecha);
+        duracion= (TextView)findViewById(R.id.text_duracion);
+        argumento= (TextView)findViewById(R.id.text_argumento);
+        caratula= (ImageView)findViewById(R.id.img_caratula);
 
         if (pelicula!=null) //apertura en modo consulta
             mostrarDatos(pelicula);
@@ -75,6 +128,11 @@ public class ShowMovie extends AppCompatActivity {
                 verTrailer(pelicula.getUrlTrailer());
             }
         });
+
+
+
+
+
     }
 
     @Override
@@ -83,20 +141,7 @@ public class ShowMovie extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == R.id.Compartir){
-            Conexion con = new Conexion(getApplicationContext());
 
-            if(con.compruebaConexion()){
-                compartirPeli();
-            }
-            else
-                Toast.makeText(getApplicationContext(), "No se ha establecido la conexion, no se puede compartir.",Toast.LENGTH_LONG);
-
-        }
-        return false;
-    }
 
     // Carga los datos que tenemos en la instancia en los componentes de la activity para mostrarlos
     public void mostrarDatos(Pelicula pelicula){
@@ -108,6 +153,9 @@ public class ShowMovie extends AppCompatActivity {
             Picasso.get()
                     .load(pelicula.getUrlFondo()).into(imagenFondo);
 
+
+
+            /*
             categoria.setText(pelicula.getCategoria().getNombre());
             estreno.setText(pelicula.getFecha());
             duracion.setText(pelicula.getDuracion());
@@ -116,6 +164,14 @@ public class ShowMovie extends AppCompatActivity {
             // Imagen de la carátula
             Picasso.get()
                     .load(pelicula.getUrlCaratula()).into(caratula);
+            */
+
+            ArgumentoFragment argumentoFragment=ArgumentoFragment.newInstance
+                    (pelicula.getArgumento());
+
+            /* ¿Qué estaremos haciendo aquí? */
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, argumentoFragment).commit();
+
         }
     }
 

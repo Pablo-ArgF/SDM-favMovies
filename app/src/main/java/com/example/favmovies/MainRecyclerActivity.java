@@ -52,6 +52,9 @@ public class MainRecyclerActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         listaPeliView.setLayoutManager(layoutManager);
 
+        //cargamos las peliculas
+        cargarPeliculas();
+
         //Pasamos la lista de peliculas al RecyclerView con el ListaPeliculaAdapter
         // Instanciamos el adapter con los datos de la petición y lo asignamos a RecyclerView
         // Generar el adaptador, le pasamos la lista de peliculas
@@ -66,17 +69,16 @@ public class MainRecyclerActivity extends AppCompatActivity {
         listaPeliView.setAdapter(lpAdapter);
 
         //añadimos la logica de añadir una pelicula
-        btnFloatingAddFilm = findViewById(R.id.BtnAddFloating);
+        /*btnFloatingAddFilm = findViewById(R.id.BtnAddFloating);
         //on click -> abrimos la pantalla main activity
         btnFloatingAddFilm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mostrarPantallaAddPelicula();
             }
-        });
+        });*/
 
-        //cargamos las peliculas
-        cargarPeliculas();
+
 
     }
 

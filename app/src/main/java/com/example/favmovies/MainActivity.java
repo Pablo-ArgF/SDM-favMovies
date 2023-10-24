@@ -66,9 +66,12 @@ public class MainActivity extends AppCompatActivity {
                     EditText inputArgumento = findViewById(R.id.InputArgumento);
                     EditText inputFecha = findViewById(R.id.FechaPelicula);
                     EditText inputDuracion = findViewById(R.id.DuracionPelicula);
-                    Pelicula peli = new Pelicula(inputTitulo.getText().toString(),inputArgumento.getText().toString(),
+                    Pelicula peli = new Pelicula(0,
+                            inputTitulo.getText().toString(),
+                            inputArgumento.getText().toString(),
                             listaCategorias.get(spinner.getSelectedItemPosition() - 1),
-                            inputFecha.getText().toString(),inputDuracion.getText().toString());
+                            inputFecha.getText().toString(),inputDuracion.getText().toString(),
+                            "","","");
 
                     intentResultado.putExtra(MainRecyclerActivity.PELICULA_CREADA,peli);
                     setResult(MainActivity.RESULT_OK,intentResultado);

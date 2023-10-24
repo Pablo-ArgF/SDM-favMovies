@@ -121,24 +121,26 @@ public class MainRecyclerActivity extends AppCompatActivity {
         BufferedReader bufferedReader = null;
 
         try {
-            file = getAssets().open("lista_peliculas_url_utf8.csv");
+            file = getAssets().open("peliculas.csv");
             reader = new InputStreamReader(file);
             bufferedReader = new BufferedReader(reader);
 
             String line = null;
+            int lineIndex = 1;
             while ((line = bufferedReader.readLine()) != null) {
                 String[] data = line.split(";");
-                if (data != null && data.length >= 5) {
-
-                        if (data.length == 8) {
-                            peli = new Pelicula(data[0], data[1], new Categoria(data[2], ""), data[3], data[4],
-                                    data[5], data[6], data[7]);
+                if(lineIndex++ > 1) {
+                    if (data != null && data.length >= 5) {
+                        //id;titulo;argumento;categoria;duracion;fecha;caratula;fondo;trailer
+                        if (data.length == 9) {
+                            peli = new Pelicula(Integer.parseInt(data[0]),data[1], data[2], new Categoria(data[3], ""), data[4], data[5],
+                                    data[6], data[7], data[8]);
                         } else {
-                            peli = new Pelicula(data[0], data[1], new Categoria(data[2], ""), data[3], data[4],
+                            peli = new Pelicula(Integer.parseInt(data[0]),data[1], data[2], new Categoria(data[3], ""), data[4], data[5],
                                     Caratula_por_defecto, fondo_por_defecto, trailer_por_defecto);
                         }
                         listaPeli.add(peli);
-
+                    }
                 }
             }
         } catch (IOException e) {
@@ -179,20 +181,23 @@ public class MainRecyclerActivity extends AppCompatActivity {
         BufferedReader bufferedReader = null;
 
         try {
-            file = getAssets().open("lista_peliculas_url_utf8.csv");
+            file = getAssets().open("peliculas.csv");
             reader = new InputStreamReader(file);
             bufferedReader = new BufferedReader(reader);
 
             String line = null;
+            int lineIndex = 1;
             while ((line = bufferedReader.readLine()) != null) {
                 String[] data = line.split(";");
-                if (data != null && data.length >= 5) {
-                    if(new Categoria(data[2],"").getNombre().equals(filtro)) {
-                        if (data.length == 8) {
-                            peli = new Pelicula(data[0], data[1], new Categoria(data[2], ""), data[3], data[4],
-                                    data[5], data[6], data[7]);
+                if(lineIndex++ > 1) {
+                    if (data != null && data.length >= 5) {
+                        //id;titulo;argumento;categoria;duracion;fecha;caratula;fondo;trailer
+                        //id;titulo;argumento;categoria;duracion;fecha;caratula;fondo;trailer
+                        if (data.length == 9) {
+                            peli = new Pelicula(Integer.parseInt(data[0]),data[1], data[2], new Categoria(data[3], ""), data[4], data[5],
+                                    data[6], data[7], data[8]);
                         } else {
-                            peli = new Pelicula(data[0], data[1], new Categoria(data[2], ""), data[3], data[4],
+                            peli = new Pelicula(Integer.parseInt(data[0]),data[1], data[2], new Categoria(data[3], ""), data[4], data[5],
                                     Caratula_por_defecto, fondo_por_defecto, trailer_por_defecto);
                         }
                         listaPeli.add(peli);
@@ -271,15 +276,4 @@ public class MainRecyclerActivity extends AppCompatActivity {
 
     }
 
-    private void rellenarLista() {
-        listaPeli = new ArrayList<Pelicula>();
-
-        Categoria cataccion = new Categoria("Accion","Pelisaccion");
-        Pelicula peli = new Pelicula("Tenet","Una accion epica blabla", cataccion,"150","10/01/2020");
-        Pelicula peli2 = new Pelicula("BabyDriver","conduce y tal", cataccion,"150","10/01/2020");
-        
-        
-        listaPeli.add(peli);
-        listaPeli.add(peli2);
-    }
 }

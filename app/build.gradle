@@ -42,5 +42,8 @@ dependencies {
 
 
     //metemos la picasso para poder cargar las imagenes desde una url
+    implementation 'androidx.preference:preference:1.2.1'
     implementation 'com.squareup.picasso:picasso:2.71828'
+
+    implementation 'androidx.preference:preference:1.2.1'
 }

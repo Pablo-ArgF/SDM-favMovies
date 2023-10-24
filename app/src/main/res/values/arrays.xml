@@ -1,10 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="tipos_pelis_array">
-        <item>Sin categoría</item>
-        <item>Terror</item>
-        <item>Comedia</item>
-        <item>Romantica</item>
+        <item>Sin definir</item>
+        <item>Acción</item>
+        <item>Aventuras</item>
+        <item>Dramáticas</item>
+        <item>De terror</item>
+        <item>Musicales</item>
+        <item>Ciencia Ficción</item>
+        <item>De guerra</item>
+        <item>Comedias</item>
+        <item>Románticas</item>
+    </string-array>
+    <string-array name="listapelis_entradas">
+        <item>Acción</item>
+        <item>Aventura</item>
+        <item>Drama</item>
+        <item>Ciencia Ficción</item>
+        <item>Fantasía</item>
+        <item>Animación</item>
     </string-array>
 
+    <string-array name="listapelis_valores">
+        <item>Acción</item>
+        <item>Aventura</item>
+        <item>Drama</item>
+        <item>Ciencia Ficción</item>
+        <item>Fantasía</item>
+        <item>Animación</item>
+    </string-array>
 </resources>

@@ -70,7 +70,7 @@ public class InfoFragment extends Fragment {
         //Mostramos el fragmento en el contenedor
         View root= inflater.inflate(R.layout.fragment_info, container, false);
         TextView tvFecha = root.findViewById(R.id.text_fecha);
-        TextView tvDuracion = root.findViewById(R.id.text_fecha);
+        TextView tvDuracion = root.findViewById(R.id.text_duracion);
         ImageView ivCaratula = root.findViewById(R.id.img_caratula);
         tvFecha.setText(fechaPeli);
         tvDuracion.setText(duracionPeli);

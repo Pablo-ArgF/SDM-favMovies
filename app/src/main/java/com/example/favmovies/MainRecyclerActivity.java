@@ -17,8 +17,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.favmovies.datos.AppDatabase;
+import com.example.favmovies.datos.PeliculaDAO;
 import com.example.favmovies.modelo.Categoria;
 import com.example.favmovies.modelo.Pelicula;
+import com.example.favmovies.util.ImageManager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.BufferedReader;
@@ -40,11 +43,15 @@ public class MainRecyclerActivity extends AppCompatActivity {
 
     private String filtroCategoria = null;
 
+    private AppDatabase appDatabase;
+
     @Override
     protected void onResume() {
         super.onResume();
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         this.filtroCategoria = sharedPreferences.getString("filtroCategoria", null);
+
+
     }
 
     @Override
@@ -52,6 +59,8 @@ public class MainRecyclerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_recycler);
 
+
+        this.appDatabase = AppDatabase.getDatabase(this);
 
 
         // Recuperamos referencia y configuramos recyclerView con la lista de usuarios
@@ -68,6 +77,14 @@ public class MainRecyclerActivity extends AppCompatActivity {
 
         //cargamos las peliculas
         cargarPeliculas();
+
+
+
+        //cargamos las peliculas de la bd
+        if(this.filtroCategoria == null)
+            this.listaPeli = new ArrayList(appDatabase.getPeliculaDAO().getAll());
+        else
+            this.listaPeli = new ArrayList(appDatabase.getPeliculaDAO().findByCategoriaNombre(filtroCategoria));
 
         //Pasamos la lista de peliculas al RecyclerView con el ListaPeliculaAdapter
         // Instanciamos el adapter con los datos de la petición y lo asignamos a RecyclerView
@@ -134,12 +151,15 @@ public class MainRecyclerActivity extends AppCompatActivity {
                         //id;titulo;argumento;categoria;duracion;fecha;caratula;fondo;trailer
                         if (data.length == 9) {
                             peli = new Pelicula(Integer.parseInt(data[0]),data[1], data[2], new Categoria(data[3], ""), data[4], data[5],
-                                    data[6], data[7], data[8]);
+                                    ImageManager.getImageCaratula(data[6]), data[7], data[8]);
+
                         } else {
                             peli = new Pelicula(Integer.parseInt(data[0]),data[1], data[2], new Categoria(data[3], ""), data[4], data[5],
-                                    Caratula_por_defecto, fondo_por_defecto, trailer_por_defecto);
+                                    ImageManager.getImageCaratula(Caratula_por_defecto), fondo_por_defecto, trailer_por_defecto);
                         }
-                        listaPeli.add(peli);
+                        //cargamos en el DAO la pelicula
+                        appDatabase.getPeliculaDAO().add(peli);
+                        //listaPeli.add(peli);
                     }
                 }
             }

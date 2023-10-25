@@ -18,8 +18,10 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.favmovies.datos.AppDatabase;
+import com.example.favmovies.datos.InterpretePeliculaCrossRef;
 import com.example.favmovies.datos.PeliculaDAO;
 import com.example.favmovies.modelo.Categoria;
+import com.example.favmovies.modelo.Interprete;
 import com.example.favmovies.modelo.Pelicula;
 import com.example.favmovies.util.ImageManager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -77,6 +79,8 @@ public class MainRecyclerActivity extends AppCompatActivity {
 
         //cargamos las peliculas
         cargarPeliculas();
+        cargarInterpretes();
+        cargarRelacionInterpretePelicula();
 
 
 
@@ -112,11 +116,120 @@ public class MainRecyclerActivity extends AppCompatActivity {
 
 
     }
+
+    private void cargarRelacionInterpretePelicula() {
+
+        InterpretePeliculaCrossRef ref;
+        InputStream file = null;
+        InputStreamReader reader = null;
+        BufferedReader bufferedReader = null;
+
+        try {
+            file = getAssets().open("peliculas-reparto.csv");
+            reader = new InputStreamReader(file);
+            bufferedReader = new BufferedReader(reader);
+            bufferedReader.readLine();
+            String line = null;
+            while ((line = bufferedReader.readLine()) != null) {
+                String[] data = line.split(";");
+                if (data != null) {
+                    if (data.length==2) {
+                        ref = new InterpretePeliculaCrossRef(Integer.parseInt(data[1]),Integer.parseInt(data[0]));
+                        this.appDatabase.getInterpretePeliculaCrossRefDAO().add(ref);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (bufferedReader != null) {
+                try {
+                    bufferedReader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+    private void cargarInterpretes() {
+
+        Interprete interprete;
+        InputStream file = null;
+        InputStreamReader reader = null;
+        BufferedReader bufferedReader = null;
+
+        try {
+            file = getAssets().open("interpretes.csv");
+            reader = new InputStreamReader(file);
+            bufferedReader = new BufferedReader(reader);
+            bufferedReader.readLine();
+            String line = null;
+            while ((line = bufferedReader.readLine()) != null) {
+                String[] data = line.split(";");
+                if (data != null) {
+                    if (data.length==4) {
+                        interprete = new Interprete(Integer.parseInt(data[0]),data[1],data[2],data[3]);
+                        this.appDatabase.getInterpreteDAO().add(interprete);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (bufferedReader != null) {
+                try {
+                    bufferedReader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu,menu);
 
         return super.onCreateOptionsMenu(menu);
+    }
+
+    private void cargarReparto() {
+
+        InterpretePeliculaCrossRef interpretePeliculaCrossRef;
+        InputStream file = null;
+        InputStreamReader reader = null;
+        BufferedReader bufferedReader = null;
+
+        try {
+            file = getAssets().open("peliculas-reparto.csv");
+            reader = new InputStreamReader(file);
+            bufferedReader = new BufferedReader(reader);
+            bufferedReader.readLine();
+            String line = null;
+            while ((line = bufferedReader.readLine()) != null) {
+                String[] data = line.split(";");
+                if (data != null) {
+                    if (data.length==2) {
+                        interpretePeliculaCrossRef  = new InterpretePeliculaCrossRef(
+                                Integer.parseInt(data[1]), Integer.parseInt(data[0]));
+
+                        //añadimos los datos a la bd
+                        appDatabase.getInterpretePeliculaCrossRefDAO()
+                                .add(interpretePeliculaCrossRef);
+
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (bufferedReader != null) {
+                try {
+                    bufferedReader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     /**

@@ -23,8 +23,8 @@ import com.squareup.picasso.Picasso;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
-
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 
 //import es.uniovi.eii.sdm.modelo.Pelicula;
@@ -71,7 +71,7 @@ public class ShowMovie extends AppCompatActivity {
             if (itemId == R.id.navigation_actores)
             {
                 ActoresFragment actoresFrag =
-                        ActoresFragment.newInstance("Aqui van los actores");
+                        ActoresFragment.newInstance(pelicula.getId());
 
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, actoresFrag).commit();
                 return true;

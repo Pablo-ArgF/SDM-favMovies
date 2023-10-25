@@ -7,6 +7,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 
+import com.example.favmovies.modelo.Interprete;
 import com.example.favmovies.modelo.Pelicula;
 
 
@@ -23,11 +24,14 @@ import com.example.favmovies.modelo.Pelicula;
     Por ahora, solamente la clase Pelicula.
 
  */
-@Database(version= 1, entities = {Pelicula.class})
+@Database(version= 2, entities = {Pelicula.class, Interprete.class,InterpretePeliculaCrossRef.class})
 public abstract class AppDatabase extends RoomDatabase {
 
     /*Aquí iremos añadiendo los DAO */
     public abstract PeliculaDAO getPeliculaDAO();
+    public abstract InterpreteDAO getInterpreteDAO();
+    public abstract InterpretePeliculaCrossRefDAO getInterpretePeliculaCrossRefDAO();
+
 
     public static final String DB_NOMBRE = "peliculas.db";
 
